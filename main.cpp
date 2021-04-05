@@ -98,15 +98,12 @@ void st_rdata(){
         i = 100;
             }
         }
-        int id;
-        char data;
-        sprintf(data, "asd %d",id);
-        //sprintf(sm.data, "%d", sm.id);
+        
         //Store data into a vector.
-        // sprintf(sm.data,"%4x,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%02d%02d%02d,%02d%02d%4d,%.3f,%.3f,%.2f,%c,%c,%.2f,%.2f,%.2f,%d",sm.id,
-        // sm.g[0], sm.g[1], sm.g[2],sm.acc[0],sm.acc[1], sm.acc[2], sm.mag[0], sm.mag[1], sm.mag[2],sm.Bpress, sm.dht_h,sm.dht_t,sm.MQ4_data.ch4,piezo_sensor.read(), sm.tgps.time.hour(),
-        // sm.tgps.time.minute(),sm.tgps.time.second(),sm.tgps.date.year(),sm.tgps.date.month(),sm.tgps.date.day(), sm.tgps.location.lng(), sm.tgps.location.lat(), sm.tgps.speed.mps(), 
-        // sm.tgps.NorthSouth, sm.tgps.EastWest, sm.Balt, sm.tgps.altitude.meters(),bat_level(),sm.xbee_power_level);
+         std::sprintf((char *)sm.data,"%4x,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%02d%02d%02d,%02d%02d%4d,%.3f,%.3f,%.2f,%c,%c,%.2f,%.2f,%.2f,%d",sm.id,
+         sm.g[0], sm.g[1], sm.g[2],sm.acc[0],sm.acc[1], sm.acc[2], sm.mag[0], sm.mag[1], sm.mag[2],sm.Bpress, sm.dht_h,sm.dht_t,sm.MQ4_data.ch4,piezo_sensor.read(), sm.tgps.time.hour(),
+         sm.tgps.time.minute(),sm.tgps.time.second(),sm.tgps.date.year(),sm.tgps.date.month(),sm.tgps.date.day(), sm.tgps.location.lng(), sm.tgps.location.lat(), sm.tgps.speed.mps(), 
+         sm.tgps.NorthSouth, sm.tgps.EastWest, sm.Balt, sm.tgps.altitude.meters(),bat_level(),sm.xbee_power_level);
         
         #if defined(WRITE_LOCAL_DATA)
         file_write(data);
