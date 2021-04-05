@@ -170,3 +170,6 @@ void file_write(char* data_file){
     fclose(sm.fp);
 }
 
+float bat_level(){
+  return bat_pin.read()*5;
+}
