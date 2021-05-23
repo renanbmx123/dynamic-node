@@ -39,27 +39,27 @@ uint16_t RemoteXBee::get_addr16() const
     return _dev_addr16;
 }
 
-RemoteXBee802::RemoteXBee802() : RemoteXBee()
-{
-}
+// RemoteXBee802::RemoteXBee802() : RemoteXBee()
+// {
+// }
 
-RemoteXBee802::RemoteXBee802(uint64_t remote64) : RemoteXBee(remote64)
-{
-}
+// RemoteXBee802::RemoteXBee802(uint64_t remote64) : RemoteXBee(remote64)
+// {
+// }
 
-RemoteXBee802::RemoteXBee802(uint16_t remote16) : RemoteXBee()
-{
-    _dev_addr16 = remote16;
-}
+// RemoteXBee802::RemoteXBee802(uint16_t remote16) : RemoteXBee()
+// {
+//     _dev_addr16 = remote16;
+// }
 
-RemoteXBee802::RemoteXBee802(uint64_t remote64, uint16_t remote16) : RemoteXBee(remote64)
-{
-    _dev_addr16 = remote16;
-}
+// RemoteXBee802::RemoteXBee802(uint64_t remote64, uint16_t remote16) : RemoteXBee(remote64)
+// {
+//     _dev_addr16 = remote16;
+// }
 
-RemoteXBee802::~RemoteXBee802()
-{
-}
+// RemoteXBee802::~RemoteXBee802()
+// {
+// }
 
 RemoteXBeeZB::RemoteXBeeZB() : RemoteXBee()
 {
@@ -78,14 +78,14 @@ RemoteXBeeZB::~RemoteXBeeZB()
 {
 }
 
-RemoteXBeeDM::RemoteXBeeDM() : RemoteXBee()
-{
-}
+// RemoteXBeeDM::RemoteXBeeDM() : RemoteXBee()
+// {
+// }
 
-RemoteXBeeDM::RemoteXBeeDM(uint64_t remote64) : RemoteXBee(remote64)
-{
-}
+// RemoteXBeeDM::RemoteXBeeDM(uint64_t remote64) : RemoteXBee(remote64)
+// {
+// }
 
-RemoteXBeeDM::~RemoteXBeeDM()
-{
-}
+// RemoteXBeeDM::~RemoteXBeeDM()
+// {
+// }

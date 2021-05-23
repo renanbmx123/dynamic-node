@@ -13,7 +13,7 @@
 #ifndef __ADDRESSES_H_
 #define __ADDRESSES_H_
 
-#include <stdint.h>
+#    /* Check if radio is in API1 or API2 _mode */
 #include <string.h>
 
 #include "Utils/Utils.h"

@@ -12,6 +12,8 @@
 
 #include "XBeeLib.h"
 #include "Frames/ApiFrame.h"
+#include <chrono>
+#include <cstdint>
 
 using namespace XBeeLib;
 
@@ -67,7 +69,7 @@ RadioStatus XBee::software_reset(void)
 
     cmdresp = set_param("FR");
     if (cmdresp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelError, "software_reset failed!\r\n");
+        //digi_log(LogLevelError, "software_reset failed!\r\n");
         return Failure;
     }
 
@@ -172,7 +174,8 @@ RadioStatus XBee::start_node_discovery()
 
 bool XBee::is_node_discovery_in_progress()
 {
-    const int nd_timer = _nd_timer.read_ms();
+    const int nd_timer = chrono::duration_cast<chrono::milliseconds>(_nd_timer.elapsed_time()).count();
+
 
     if (nd_timer == 0)
         return false;
@@ -224,20 +227,20 @@ void XBee::_get_remote_node_by_id(const char * const node_id, uint64_t * const a
     _node_by_ni_frame_id = 0;
 
     if (resp_frame == NULL) {
-        digi_log(LogLevelWarning, "_get_remote_node_by_id: timeout when waiting for ATND response");
+        //digi_log(LogLevelWarning, "_get_remote_node_by_id: timeout when waiting for ATND response");
         return;
     }
 
     if (resp_frame->get_data_len() < sizeof (uint16_t) + sizeof (uint64_t)) {
         /* In 802.15.4 this might be the OK or Timeout message with no information */
-        digi_log(LogLevelInfo, "_get_remote_node_by_id: node not found\r\n", __FUNCTION__, node_id);
+        //digi_log(LogLevelInfo, "_get_remote_node_by_id: node not found\r\n", __FUNCTION__, node_id);
         _framebuf_syncr.free_frame(resp_frame);
         return;
     }
 
     const AtCmdFrame::AtCmdResp resp = (AtCmdFrame::AtCmdResp)resp_frame->get_data_at(ATCMD_RESP_STATUS_OFFSET);
     if (resp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelWarning, "_get_remote_node_by_id: send_at_cmd bad response: 0x%x\r\n", resp);
+        //digi_log(LogLevelWarning, "_get_remote_node_by_id: send_at_cmd bad response: 0x%x\r\n", resp);
         _framebuf_syncr.free_frame(resp_frame);
         return;
     }
@@ -247,9 +250,10 @@ void XBee::_get_remote_node_by_id(const char * const node_id, uint64_t * const a
     _framebuf_syncr.free_frame(resp_frame);
 
     if (wait_for_complete_timeout) {
-        while (nd_timer.read_ms() < nd_timeout) {
-            //wait_ms(10);
-            ThisThread::sleep_for(chrono::milliseconds(10));
+        int16_t t = chrono::duration_cast<chrono::milliseconds>(nd_timer.elapsed_time()).count();
+        while (t < nd_timeout) {
+            thread_sleep_for(10);
+            int16_t t = chrono::duration_cast<chrono::milliseconds>(nd_timer.elapsed_time()).count();
         }
     }
 
@@ -303,7 +307,7 @@ RadioStatus XBee::_get_iosample(const RemoteXBee& remote, uint8_t * const io_sam
     /* Force a sample read */
     cmdresp = get_param(remote, "IS", io_sample, len);
     if (cmdresp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelError, "_get_iosample error %d:\r\n", cmdresp);
+        //digi_log(LogLevelError, "_get_iosample error %d:\r\n", cmdresp);
         return Failure;
     }
 
@@ -324,7 +328,7 @@ RadioStatus XBee::config_io_sample_destination(const RemoteXBee& remote, const R
         dh = 0;
         dl = destAddr16;
     } else {
-        digi_log(LogLevelError, "send_io_sample_to: Invalid destination");
+        //digi_log(LogLevelError, "send_io_sample_to: Invalid destination");
         return Failure;
     }
 
@@ -332,13 +336,13 @@ RadioStatus XBee::config_io_sample_destination(const RemoteXBee& remote, const R
 
     cmdresp = set_param(remote, "DH", dh);
     if (cmdresp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelError, "send_io_sample_to error %d:\r\n", cmdresp);
+        //digi_log(LogLevelError, "send_io_sample_to error %d:\r\n", cmdresp);
         return Failure;
     }
 
     cmdresp = set_param(remote, "DL", dl);
     if (cmdresp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelError, "send_io_sample_to error %d:\r\n", cmdresp);
+        //digi_log(LogLevelError, "send_io_sample_to error %d:\r\n", cmdresp);
         return Failure;
     }
 
@@ -350,7 +354,7 @@ RadioStatus XBee::set_io_sample_rate(const RemoteXBee& remote, const float secon
     const float max_seconds = 65.535;
 
     if (seconds > max_seconds) {
-        digi_log(LogLevelError, "XBee::set_io_sample_rate error seconds rate exceeds maximum %d:\r\n", max_seconds);
+        //digi_log(LogLevelError, "XBee::set_io_sample_rate error seconds rate exceeds maximum %d:\r\n", max_seconds);
         return Failure;
     }
 
@@ -359,7 +363,7 @@ RadioStatus XBee::set_io_sample_rate(const RemoteXBee& remote, const float secon
 
     cmdresp = set_param(remote, "IR", milliseconds);
     if (cmdresp != AtCmdFrame::AtCmdRespOk) {
-        digi_log(LogLevelError, "XBee::set_io_sample_rate error %d:\r\n", cmdresp);
+        //digi_log(LogLevelError, "XBee::set_io_sample_rate error %d:\r\n", cmdresp);
         return Failure;
     }
 

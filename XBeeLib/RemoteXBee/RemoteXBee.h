@@ -84,46 +84,46 @@ class RemoteXBee
         uint16_t    _dev_addr16;
 };
 
-class FH_NodeDiscovery802;
+//class FH_NodeDiscovery802;
 /** Class for 802.15.4 Remote XBee modules */
-class RemoteXBee802 : public RemoteXBee
-{
-    public:
+// class RemoteXBee802 : public RemoteXBee
+// {
+//     public:
 
-         /** Default Class constructor for a 802.15.4 remote device (connected wirelessly). No address set.
-         */
-        RemoteXBee802();
+//          /** Default Class constructor for a 802.15.4 remote device (connected wirelessly). No address set.
+//          */
+//         RemoteXBee802();
 
-        /** Class constructor for a 802.15.4 remote device (connected wirelessly) using 64bit addressing
-         * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
-         */
-        RemoteXBee802(uint64_t remote64);
+//         /** Class constructor for a 802.15.4 remote device (connected wirelessly) using 64bit addressing
+//          * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
+//          */
+//         RemoteXBee802(uint64_t remote64);
 
-        /** Class constructor for a 802.15.4 remote device (connected wirelessly) using 16bit addressing
-         * @param remote16 the 16-bit address (ATMY parameter) of the remote XBee module
-         */
-        RemoteXBee802(uint16_t remote16);
+//         /** Class constructor for a 802.15.4 remote device (connected wirelessly) using 16bit addressing
+//          * @param remote16 the 16-bit address (ATMY parameter) of the remote XBee module
+//          */
+//         RemoteXBee802(uint16_t remote16);
 
-        /** Class destructor */
-        ~RemoteXBee802();
+//         /** Class destructor */
+//         ~RemoteXBee802();
 
-        inline bool is_valid(void)
-        {
-            return is_valid_addr64b() || is_valid_addr16b();
-        }
+//         inline bool is_valid(void)
+//         {
+//             return is_valid_addr64b() || is_valid_addr16b();
+//         }
 
-    protected:
+//     protected:
 
-        friend FH_NodeDiscovery802;
-        friend class XBee802;
+//         friend FH_NodeDiscovery802;
+//         friend class XBee802;
 
-        /** Class constructor for a 802.15.4 remote device (connected wirelessly) for which both the 64-bit and 16-bit addresses are known.
-         * This constructor is only used by FH_NodeDiscovery802 class.
-         * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
-         * @param remote16 the 16-bit address (ATMY parameter) of the remote XBee module
-         */
-        RemoteXBee802(uint64_t remote64, uint16_t remote16);
-};
+//         /** Class constructor for a 802.15.4 remote device (connected wirelessly) for which both the 64-bit and 16-bit addresses are known.
+//          * This constructor is only used by FH_NodeDiscovery802 class.
+//          * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
+//          * @param remote16 the 16-bit address (ATMY parameter) of the remote XBee module
+//          */
+//         RemoteXBee802(uint64_t remote64, uint16_t remote16);
+// };
 
 /** Class for ZigBee Remote XBee modules */
 class RemoteXBeeZB : public RemoteXBee
@@ -154,28 +154,28 @@ class RemoteXBeeZB : public RemoteXBee
         }
 };
 
-/** Class for DigiMesh Remote XBee modules */
-class RemoteXBeeDM : public RemoteXBee
-{
-    public:
+// /** Class for DigiMesh Remote XBee modules */
+// class RemoteXBeeDM : public RemoteXBee
+// {
+//     public:
 
-         /** Default Class constructor for a DigiMesh remote device (connected wirelessly). No address set.
-         */
-        RemoteXBeeDM();
+//          /** Default Class constructor for a DigiMesh remote device (connected wirelessly). No address set.
+//          */
+//         RemoteXBeeDM();
 
-       /** Class constructor for a DigiMesh remote device (connected wirelessly) using 64bit addressing
-         * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
-         */
-        RemoteXBeeDM(uint64_t remote64);
+//        /** Class constructor for a DigiMesh remote device (connected wirelessly) using 64bit addressing
+//          * @param remote64 the 64-bit address (ATSH and ATSL parameters) of the remote XBee module
+//          */
+//         RemoteXBeeDM(uint64_t remote64);
 
-        /** Class destructor */
-        ~RemoteXBeeDM();
+//         /** Class destructor */
+//         ~RemoteXBeeDM();
 
-        inline bool is_valid(void)
-        {
-            return is_valid_addr64b();
-        }
-};
+//         inline bool is_valid(void)
+//         {
+//             return is_valid_addr64b();
+//         }
+// };
 
 }   /* namespace XBeeLib */
 

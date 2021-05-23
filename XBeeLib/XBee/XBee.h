@@ -10,19 +10,19 @@
  * =======================================================================
  */
 
+#include "Callback.h"
+#include "UnbufferedSerial.h"
 #if !defined(__DIGI_RADIO_H_)
 #define __DIGI_RADIO_H_
 
 #include <stdint.h>
 #include "config.h"
-#include "Utils/Debug.h"
 #include "Frames/AtCmdFrame.h"
 #include "FrameHandlers/FrameHandler.h"
 #include "FrameHandlers/FH_ModemStatus.h"
 #include "FrameBuffer/FrameBuffer.h"
 #include "Addresses.h"
 #include "RemoteXBee/RemoteXBee.h"
-#include "IO/IO.h"
 
 #define MAX_FRAME_HANDLERS      4
 #define RESET_TIMEOUT_MS        5000
@@ -487,6 +487,9 @@ class XBee
         /** unregister_modem_status_cb - removes the Modem Status reception callback */
         void unregister_modem_status_cb();
 
+        void send_uart_data(void);
+        void send_uart_data_set(void);
+
     protected:
 
 #define EXTRA_XBEE_PROTOCOLS
@@ -539,7 +542,7 @@ class XBee
         virtual
 #endif
         void send_api_frame(ApiFrame *frame);
-
+        
         /** update_radio_status - method called when a modem status frame is received
          *  to update the internal status variables of the library.
          *  @note This is not a pure virtual function because it can be called while

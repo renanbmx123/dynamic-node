@@ -27,11 +27,11 @@
                                         XB_MAJOR_VERSION, XB_MINOR_VERSION, XB_PATCH_LEVEL
 
 #include "XBeeZB/XBeeZB.h"
-#include "IO/IOSampleZB.h"
-#include "XBee802/XBee802.h"
-#include "IO/IOSample802.h"
-#include "XBeeDM/XBeeDM.h"
-#include "IO/IOSampleDM.h"
+//#include "IO/IOSampleZB.h"
+//#include "XBee802/XBee802.h"
+//#include "IO/IOSample802.h"
+//#include "XBeeDM/XBeeDM.h"
+//#include "IO/IOSampleDM.h"
 #include "XBee/Addresses.h"
 #include "RemoteXBee/RemoteXBee.h"
 

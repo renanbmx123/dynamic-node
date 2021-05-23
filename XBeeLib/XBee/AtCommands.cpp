@@ -11,6 +11,7 @@
  */
 
 #include "XBeeLib.h"
+#include <cstdio>
 
 #define GET_CMD_RESP(fr, radio_location)    (radio_location == RadioRemote ? fr->get_data_at(REM_AT_CMD_RESP_STATUS_OFFSET) \
                                                                    : fr->get_data_at(ATCMD_RESP_STATUS_OFFSET))
@@ -33,13 +34,13 @@ AtCmdFrame::AtCmdResp XBee::send_at_cmd(AtCmdFrame *frame,
     ApiFrame::ApiFrameType expected_type =
             (frame->get_frame_type() == ApiFrame::AtCmd) ?
             ApiFrame::AtCmdResp : ApiFrame::RemoteCmdResp;
-
     send_api_frame(frame);
-
+    
     /* Wait for the AT command response packet */
     resp_frame = get_this_api_frame(frame->get_frame_id(), expected_type);
     if (resp_frame == NULL) {
         return resp;
+        
     }
 
     resp = (AtCmdFrame::AtCmdResp)GET_CMD_RESP(resp_frame, radio_location);
@@ -59,7 +60,7 @@ AtCmdFrame::AtCmdResp XBee::send_at_cmd(AtCmdFrame *frame,
             }
         }
     } else {
-        digi_log(LogLevelWarning, "send_at_cmd bad response: 0x%x\r\n", resp);
+        //digi_log(LogLevelWarning, "send_at_cmd bad response: 0x%x\r\n", resp);
     }
 
     /* Once processed, remove the frame from the buffer */
@@ -114,14 +115,13 @@ AtCmdFrame::AtCmdResp XBee::get_param(const char * const param, uint32_t * const
 {
     uint16_t len = sizeof *data;
     AtCmdFrame cmd_frame = AtCmdFrame(param);
-
     *data = 0; /* Set to zero, send_at_cmd() only writes the necessary bytes, so if only 1 is written all the remaining 3 should be 0. */
     AtCmdFrame::AtCmdResp atCmdResponse = send_at_cmd(&cmd_frame, (uint8_t *)data, &len);
 
     if (atCmdResponse == AtCmdFrame::AtCmdRespOk && len > sizeof *data) {
         atCmdResponse = AtCmdFrame::AtCmdRespLenMismatch;
     }
-
+    
     return atCmdResponse;
 }
 

@@ -11,7 +11,7 @@
  */
 
 #include "mbed.h"
-#include "Utils/Debug.h"
+//#include "Utils/Debug.h"
 #include "AtCmdFrame.h"
 
 #define AT_CMD_LEN              2
@@ -31,14 +31,13 @@ void AtCmdFrame::build_at_cmd_frame(const char *cmd, const uint8_t *cmd_params, 
             memcpy(&frame_data[3], cmd_params, payload_len);
         }
     }
-
     set_api_frame(AtCmd, frame_data, AT_CMD_LEN + AT_CMD_ID_LEN + payload_len);
 }
 
 AtCmdFrame::AtCmdFrame(const char * const cmd, uint32_t cmd_param)
 {
-    assert(cmd != NULL);
-    assert(strlen(cmd) == AT_CMD_LEN);
+    // assert(cmd != NULL);
+    // assert(strlen(cmd) == AT_CMD_LEN);
 
     uint8_t len;
     if (cmd_param <= 0xFF) {
@@ -55,16 +54,16 @@ AtCmdFrame::AtCmdFrame(const char * const cmd, uint32_t cmd_param)
 
 AtCmdFrame::AtCmdFrame(const char * const cmd, const uint8_t * cmd_param, uint16_t param_len)
 {
-    assert(cmd != NULL);
-    assert(strlen(cmd) == AT_CMD_LEN);
+    // assert(cmd != NULL);
+    // assert(strlen(cmd) == AT_CMD_LEN);
 
     build_at_cmd_frame(cmd, cmd_param, param_len, false);
 }
 
 AtCmdFrame::AtCmdFrame(uint64_t remote, const char * const cmd, uint32_t cmd_param)
 {
-    assert(cmd != NULL);
-    assert(strlen(cmd) == AT_CMD_LEN);
+    // assert(cmd != NULL);
+    // assert(strlen(cmd) == AT_CMD_LEN);
 
     build_at_cmd_remote_frame(remote, ADDR16_UNKNOWN, cmd, (uint8_t *)&cmd_param, 4);
 }

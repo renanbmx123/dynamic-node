@@ -86,31 +86,31 @@ class FH_NodeDiscoveryZB : public FH_AtCmdResp
   * @param remote discovered remote node.
   * @param node_id Node Identifier (NI parameter) of remote.
   */
-typedef void (*node_discovery_dm_cb_t)(const RemoteXBeeDM& remote, char const * const node_id);
+//typedef void (*node_discovery_dm_cb_t)(const RemoteXBeeDM& remote, char const * const node_id);
 /**
  * @}
  */
 
-class FH_NodeDiscoveryDM : public FH_AtCmdResp
-{
-    private:
-        /** Callback function, invoked (if registered) when an at command response packet is received */
-        node_discovery_dm_cb_t node_discovery_cb;
+// class FH_NodeDiscoveryDM : public FH_AtCmdResp
+// {
+//     private:
+//         /** Callback function, invoked (if registered) when an at command response packet is received */
+//         node_discovery_dm_cb_t node_discovery_cb;
 
-    public:
+//     public:
 
-        /** Class constructor */
-        FH_NodeDiscoveryDM();
+//         /** Class constructor */
+//         FH_NodeDiscoveryDM();
 
-        /** Class destructor */
-        virtual ~FH_NodeDiscoveryDM();
+//         /** Class destructor */
+//         virtual ~FH_NodeDiscoveryDM();
 
-        virtual void process_frame_data(const ApiFrame *const frame);
+//         virtual void process_frame_data(const ApiFrame *const frame);
 
-        virtual void register_node_discovery_cb(node_discovery_dm_cb_t function);
+//         virtual void register_node_discovery_cb(node_discovery_dm_cb_t function);
 
-        virtual void unregister_node_discovery_cb();
-};
+//         virtual void unregister_node_discovery_cb();
+// };
 
 /**
  * @defgroup callback_types "Callback types declaration"
@@ -120,31 +120,31 @@ class FH_NodeDiscoveryDM : public FH_AtCmdResp
   * @param remote discovered remote node.
   * @param node_id Node Identifier (NI parameter) of remote.
   */
-typedef void (*node_discovery_802_cb_t)(const RemoteXBee802& remote, char const * const node_id);
+//typedef void (*node_discovery_802_cb_t)(const RemoteXBee802& remote, char const * const node_id);
 /**
  * @}
  */
 
-class FH_NodeDiscovery802 : public FH_AtCmdResp
-{
-    private:
-        /** Callback function, invoked (if registered) when an at command response packet is received */
-        node_discovery_802_cb_t node_discovery_cb;
+// class FH_NodeDiscovery802 : public FH_AtCmdResp
+// {
+//     private:
+//         /** Callback function, invoked (if registered) when an at command response packet is received */
+//         node_discovery_802_cb_t node_discovery_cb;
 
-    public:
+//     public:
 
-        /** Class constructor */
-        FH_NodeDiscovery802();
+//         /** Class constructor */
+//         FH_NodeDiscovery802();
 
-        /** Class destructor */
-        virtual ~FH_NodeDiscovery802();
+//         /** Class destructor */
+//         virtual ~FH_NodeDiscovery802();
 
-        virtual void process_frame_data(const ApiFrame *const frame);
+//         virtual void process_frame_data(const ApiFrame *const frame);
 
-        virtual void register_node_discovery_cb(node_discovery_802_cb_t function);
+//         virtual void register_node_discovery_cb(node_discovery_802_cb_t function);
 
-        virtual void unregister_node_discovery_cb();
-};
+//         virtual void unregister_node_discovery_cb();
+// };
 
 } /* namespace XBeeLib */
 

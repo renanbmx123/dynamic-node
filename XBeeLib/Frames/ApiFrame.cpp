@@ -13,6 +13,8 @@
 #include "mbed.h"
 #include "XBee/XBee.h"
 #include "ApiFrame.h"
+#include <cstdint>
+#include <cstdio>
 
 using namespace XBeeLib;
 
@@ -61,8 +63,9 @@ void ApiFrame::set_api_frame(ApiFrameType type, const uint8_t *data, uint16_t le
     }
     this->_data = new uint8_t[len];
     this->_alloc_data = true;
-    assert(this->_data != NULL);
+    //assert(this->_data != NULL);
     memcpy((void *)this->_data, data, len);
+
 }
 
 ApiFrame::~ApiFrame()
@@ -74,12 +77,12 @@ ApiFrame::~ApiFrame()
 
 void ApiFrame::dump(void) const
 {
-#if defined(ENABLE_LOGGING)
-    digi_log(LogLevelFrameData, "API frame: type %02x, len %d\r\n", this->_type, this->_data_frame_len);
+
+    printf("API frame: type %02x, len %d\r\n",this->_type, this->_data_frame_len);
     for (int i = 0; i < this->_data_frame_len; i++)
-        digi_log(LogLevelFrameData, "%02x ", this->_data[i]);
-    digi_log(LogLevelFrameData, "\r\n");
-#endif
+        printf("%02x ", this->_data[i]);
+    printf("\r\n");
+
 }
 
 void ApiFrame::dump_if(ApiFrameType type)

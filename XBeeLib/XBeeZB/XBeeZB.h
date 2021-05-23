@@ -16,7 +16,7 @@
 #include "XBee/XBee.h"
 #include "FrameHandlers/FH_AtCmdResp.h"
 #include "FrameHandlers/FH_RxPacketZB.h"
-#include "FrameHandlers/FH_IoDataSampleZB.h"
+//#include "FrameHandlers/FH_IoDataSampleZB.h"
 #include "RemoteXBee/RemoteXBee.h"
 
 namespace XBeeLib {
@@ -25,24 +25,6 @@ namespace XBeeLib {
 class XBeeZB : public XBee
 {
     public:
-
-        /**
-         * IoLine for XBeeZB Modules
-         */
-        enum IoLine {
-            DIO0_AD0 = 0,  /**< DIO0_AD0 pin */
-            DIO1_AD1 = 1,  /**< DIO1_AD1 pin */
-            DIO2_AD2 = 2,  /**< DIO2_AD2 pin */
-            DIO3_AD3 = 3,  /**< DIO3_AD3 pin */
-            DIO4     = 4,  /**< DIO4 pin */
-            DIO5     = 5,  /**< DIO5 pin */
-            DIO6     = 6,  /**< DIO6 pin */
-            DIO7     = 7,  /**< DIO7 pin */
-            DIO10    = 10, /**< DIO10 pin */
-            DIO11    = 11, /**< DIO11 pin */
-            DIO12    = 12, /**< DIO12 pin */
-            SUPPLY_VOLTAGE = 7, /**< SUPPLY_VOLTAGE is not a real pin */
-        };
 
         enum AssocStatus {
             ErrorReading    = -1,       /**< Error occurred when reading parameter. */
@@ -83,7 +65,7 @@ class XBeeZB : public XBee
          *         Success if the module has been properly initialized and is ready to process data.
          *         Failure otherwise.
          */
-        RadioStatus init();
+        XBeeLib::RadioStatus init();
 
         /** set_panid - sets the 64bit extended PAN ID.
          *
@@ -94,7 +76,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_panid(uint64_t panid);
+        XBeeLib::RadioStatus set_panid(uint64_t panid);
 
         /** get_configured_panid - gets the configured PAN ID, as it was set by @ref set_panid().
          *
@@ -105,7 +87,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_configured_panid(uint64_t * const panid);
+        XBeeLib::RadioStatus get_configured_panid(uint64_t * const panid);
 
         /** get_operating_panid - gets the operating 64bit extended PAN ID the module is running on. This is useful to determine the PAN ID when the ID parameter (@ref set_panid) is set to 0x00.
          *
@@ -114,7 +96,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_operating_panid(uint64_t * const panid);
+        XBeeLib::RadioStatus get_operating_panid(uint64_t * const panid);
 
         /** set_panid - sets the 64bit extended PAN ID.
          *
@@ -126,7 +108,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_panid(const RemoteXBee& remote, uint64_t panid);
+        XBeeLib::RadioStatus set_panid(const XBeeLib::RemoteXBee& remote, uint64_t panid);
 
         /** get_configured_panid - gets the configured PAN ID in a remote node, as it was set by @ref set_panid()
          *
@@ -139,7 +121,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_configured_panid(const RemoteXBee& remote, uint64_t * const panid);
+        XBeeLib::RadioStatus get_configured_panid(const XBeeLib::RemoteXBee& remote, uint64_t * const panid);
 
         /** get_operating_panid - gets the operating 64bit extended PAN ID in which a remote node is running on. This is useful to determine the PAN ID when the ID parameter (@ref set_panid) is set to 0x00.
          *
@@ -149,7 +131,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_operating_panid(const RemoteXBee& remote, uint64_t * const panid);
+        XBeeLib::RadioStatus get_operating_panid(const XBeeLib::RemoteXBee& remote, uint64_t * const panid);
 
         /** set_channel_mask - sets the channel mask in which the module will scan for the PAN ID (if it is a router or end-device) or start the network (if it is a coordinator).
          * It should be set to the minimum available set of channels of all nodes in the network. Refer to "SC" parameter in the product manual for more information.
@@ -159,7 +141,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_channel_mask(uint16_t const chmask);
+        XBeeLib::RadioStatus set_channel_mask(uint16_t const chmask);
 
         /** get_channel_mask - gets the channel mask in which the module will scan for the PAN ID (if it is a router or end-device) or start the network (if it is a coordinator).
          *
@@ -168,7 +150,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_channel_mask(uint16_t * const chmask);
+        XBeeLib::RadioStatus get_channel_mask(uint16_t * const chmask);
 
         /** get_network_address - gets the 16bit network address of the device
          *
@@ -177,7 +159,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_network_address(uint16_t * const addr);
+        XBeeLib::RadioStatus get_network_address(uint16_t * const addr);
 
         /** check_for_coordinator_at_start - (Routers only) If enabled, a router will verify the coordinator is on its operating channel when joining or coming up from a power cycle.
          * If a coordinator is not detected, the router will leave its current channel and attempt to join a new PAN. If JV=0, the router will continue operating on its current channel even if a coordinator is not detected.
@@ -187,7 +169,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus check_for_coordinator_at_start(bool enable);
+        XBeeLib::RadioStatus check_for_coordinator_at_start(bool enable);
 
         /** set_network_security_key - (Coordinator only) Set the 128-bit AES network encryption key. If set to 0 (default), the module will select a random network key.
          *  It is not recommended to set the key programmatically, because it could be read through the raw serial port bits.
@@ -197,7 +179,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_network_security_key(const uint8_t * const key, const uint16_t length);
+        XBeeLib::RadioStatus set_network_security_key(const uint8_t * const key, const uint16_t length);
 
 #define XBEE_ZB_ENC_OPT_SEND_KEY_ON_JOIN    0x01
 #define XBEE_ZB_ENC_OPT_USE_TRUST_CENTER    0x02
@@ -209,14 +191,14 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_encryption_options(const uint8_t options);
+        XBeeLib::RadioStatus set_encryption_options(const uint8_t options);
 
         /** register_node_discovery_cb - registers the callback function that will be called
          * when the responses to the node discovery command arrive
          *
          *  @param function function pointer with the callback function
          */
-        void register_node_discovery_cb(node_discovery_zb_cb_t function);
+        void register_node_discovery_cb(XBeeLib::node_discovery_zb_cb_t function);
 
         /** unregister_node_discovery_cb - removes the node discovery callback */
         void unregister_node_discovery_cb();
@@ -226,7 +208,7 @@ class XBeeZB : public XBee
          *
          *  @param function function pointer with the callback function
          */
-        void register_receive_cb(receive_zb_cb_t function);
+        void register_receive_cb(XBeeLib::receive_zb_cb_t function);
 
         /** unregister_receive_cb - removes the rx packet callback */
         void unregister_receive_cb();
@@ -236,10 +218,10 @@ class XBeeZB : public XBee
          *
          *  @param function function pointer with the callback function
          */
-        void register_io_sample_cb(io_data_cb_zb_t function);
+        //void register_io_sample_cb(XBeeLib::io_data_cb_zb_t function);
 
         /** unregister_io_sample_cb - removes the IO Sample Data reception callback */
-        void unregister_io_sample_cb();
+        //void unregister_io_sample_cb();
 
         /*********************** send_data member methods ************************/
         /** send_data - sends data to a remote device
@@ -358,7 +340,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_pin_config(const RemoteXBee& remote, IoLine line, IoMode mode);
+        //RadioStatus set_pin_config(const RemoteXBee& remote, IoLine line, IoMode mode);
 
         /** get_pin_config - gets the configuration of a radio IO line
          *
@@ -369,7 +351,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_pin_config(const RemoteXBee& remote, IoLine line, IoMode * const mode);
+       // RadioStatus get_pin_config(const RemoteXBee& remote, IoLine line, IoMode * const mode);
 
         /** set_dio - sets to low/high a DIO line
          *
@@ -380,7 +362,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_dio(const RemoteXBee& remote, IoLine line, DioVal val);
+        //RadioStatus set_dio(const RemoteXBee& remote, IoLine line, DioVal val);
 
         /** get_dio - read the value of a DIO configured as digital input
          *
@@ -391,7 +373,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_dio(const RemoteXBee& remote, IoLine line, DioVal * const val);
+        //RadioStatus get_dio(const RemoteXBee& remote, IoLine line, DioVal * const val);
 
         /** get_adc - read the value of the espcified ADC line
          *
@@ -402,14 +384,14 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus get_adc(const RemoteXBee& remote, IoLine line, uint16_t * const val);
+        //RadioStatus get_adc(const RemoteXBee& remote, IoLine line, uint16_t * const val);
 
         /** get_iosample - retrieves an @ref IOSampleZB from a remote node. This object can be used to get the remote node's ADC and DIO values.
          *
          *  @param remote remote device
          *  @returns IOSampleZB object with the remote node's DIO and ADC values.
          */
-        IOSampleZB get_iosample(const RemoteXBee& remote);
+        //IOSampleZB get_iosample(const RemoteXBee& remote);
 
         /** set_pin_pull_up - enables or disables the internal pull-up resistor of a line
          *
@@ -420,7 +402,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus set_pin_pull_up(const RemoteXBee& remote, IoLine line, bool enable);
+        //RadioStatus set_pin_pull_up(const RemoteXBee& remote, IoLine line, bool enable);
 
         /** enable_dio_change_detection - enables or disables the notification when a change is detected in a digital input line.
          * In other words, it will force an IO Sample transmission when the DIO state changes. Only for DIO0 to DIO11.
@@ -432,7 +414,7 @@ class XBeeZB : public XBee
          *     Success if the operation was successful,
          *     Failure otherwise
          */
-        RadioStatus enable_dio_change_detection(const RemoteXBee& remote, IoLine line, bool enable);
+        //RadioStatus enable_dio_change_detection(const RemoteXBee& remote, IoLine line, bool enable);
 
     protected:
 
@@ -446,7 +428,7 @@ class XBeeZB : public XBee
 
         /** Frame handler used for the IO Data Sample packets. Automatically registered when a callback
          *  function is registered */
-        FH_IoDataSampeZB  *_io_data_handler;
+        //FH_IoDataSampeZB  *_io_data_handler;
 
         /** Method called directly by the library when a modem status frame is received to
          * update the internal status variables */
